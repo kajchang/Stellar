@@ -19,7 +19,7 @@ export default class Bullet extends Sprite {
     init(): void {}
 
     finished(): boolean {
-        return this.x >= this.manager.width || this.x <= 0 || this.y >= this.manager.height || this.y <= 0;
+        return this.x >= this.game.width || this.x <= 0 || this.y >= this.game.height || this.y <= 0;
     }
 
     update(): void {

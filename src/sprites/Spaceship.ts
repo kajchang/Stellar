@@ -14,6 +14,8 @@ export default abstract class Spaceship extends Floater {
     protected acceleration: number;
     protected turnAmount: number;
 
+    protected size: number;
+
     protected enabled = false;
 
     draw(): void {
@@ -26,7 +28,7 @@ export default abstract class Spaceship extends Floater {
         this.enabled = false;
 
         this.p.imageMode(this.p.CENTER);
-        this.p.image(image, 0, 0, 50, 50);
+        this.p.image(image, 0, 0, this.size, this.size);
     }
 
     accelerate(dAmount: number): void {
@@ -48,16 +50,16 @@ export default abstract class Spaceship extends Floater {
     move(): void {
         super.move();
 
-        if (this.x >= this.manager.width) {
-            this.x = this.manager.width;
-        } else if (this.x <= 0) {
-            this.x = 0;
+        if (this.x >= this.game.width - this.size / 2) {
+            this.x = this.game.width - this.size / 2;
+        } else if (this.x <= this.size / 2) {
+            this.x = this.size / 2;
         }
 
-        if (this.y >= this.manager.height) {
-            this.y = this.manager.height;
-        } else if (this.y <= 0) {
-            this.y = 0;
+        if (this.y >= this.game.height - this.size / 2) {
+            this.y = this.game.height - this.size / 2;
+        } else if (this.y <= this.size / 2) {
+            this.y = this.size / 2;
         }
     }
 

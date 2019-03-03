@@ -10,8 +10,8 @@ export default class PlayerShip extends Spaceship {
         this.enabledImage = this.p.loadImage(spaceshipEnabled);
         this.disabledImage = this.p.loadImage(spaceshipDisabled);
 
-        this.x = this.manager.width / 2;
-        this.y = this.manager.height / 2;
+        this.x = this.game.width / 2;
+        this.y = this.game.height / 2;
 
         this.directionX = 0;
         this.directionY = 0;
@@ -24,6 +24,8 @@ export default class PlayerShip extends Spaceship {
 
         this.acceleration = this.maxSpeed / 5;
         this.turnAmount = 2;
+
+        this.size = 50;
     }
 
     finished(): boolean {

@@ -6,25 +6,19 @@ import Manager from './Manager';
 // @ts-ignore
 export default class SpriteManager extends Manager {
     private readonly sprites: Sprite[];
-    private readonly p: p5;
     private readonly background: any;
 
-    readonly width: number;
-    readonly height: number;
-
-    constructor(p: p5, background: any, width: number, height: number) {
+    constructor(p: p5, background: any) {
         super(p);
 
         this.sprites = [];
         this.background = background;
-
-        this.width = width;
-        this.height = height;
     }
 
     addSprite(sprite: Sprite): void {
         this.sprites.push(sprite);
         sprite.manager = this;
+        sprite.game = this.game;
         sprite.p = this.p;
         sprite.init()
     }
@@ -48,4 +42,6 @@ export default class SpriteManager extends Manager {
             this.p.pop();
         }
     }
+
+    cleanup(): void {}
 }
