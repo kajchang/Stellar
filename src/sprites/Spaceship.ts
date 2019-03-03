@@ -18,6 +18,13 @@ export default abstract class Spaceship extends Floater {
     protected bulletColor: any;
 
     protected enabled = false;
+    private lastShot: number;
+
+    update(): void {
+        if (this.lastShot > 0) {
+            this.lastShot--;
+        }
+    }
 
     draw(): void {
         this.p.translate(this.x, this.y);
@@ -93,7 +100,7 @@ export default abstract class Spaceship extends Floater {
     }
 
     shoot(): void {
-        if (this.p.frameCount % this.shotFrequency == 0) {
+        if (this.lastShot == null || this.lastShot == 0) {
             const dRadians = this.pointDirection * (Math.PI / 180);
 
             for (let gun of this.gunPositions) {
@@ -102,6 +109,8 @@ export default abstract class Spaceship extends Floater {
 
                 this.manager.addSprite(new Bullet(this.x + xOffset, this.y + yOffset, this.directionX, this.directionY, this.pointDirection, this.bulletColor));
             }
+
+            this.lastShot = this.shotFrequency;
         }
     }
 }

@@ -34,6 +34,8 @@ export default class PlayerShip extends Spaceship {
     }
 
     update(): void {
+        super.update();
+
         if (this.p.keyIsDown(38)) {
             this.accelerateForward();
         }
