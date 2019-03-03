@@ -5,7 +5,8 @@ import Sprite from '../managers/Sprite';
 // Floater Logic ported from https://github.com/APCSLowell/AsteroidsGame/blob/master/Floater.pde
 
 export default abstract class Floater extends Sprite {
-    protected image: p5.Image;
+    protected enabledImage: p5.Image;
+    protected disabledImage: p5.Image;
     protected x: number;
     protected y: number;
     protected directionX: number;
@@ -13,6 +14,15 @@ export default abstract class Floater extends Sprite {
     protected pointDirection: number;
 
     protected maxSpeed: number;
+
+    private enabled: boolean;
+
+    constructor() {
+        super();
+
+        this.enabled = false;
+    }
+
 
     accelerate(dAmount: number): void {
         const dRadians = this.pointDirection * (Math.PI / 180);
@@ -42,6 +52,10 @@ export default abstract class Floater extends Sprite {
         this.y += this.directionY;
     }
 
+    enable(): void {
+        this.enabled = true;
+    }
+
     draw(): void {
         this.p.translate(this.x, this.y);
 
@@ -49,6 +63,10 @@ export default abstract class Floater extends Sprite {
         this.p.rotate(dRadians);
 
         this.p.imageMode(this.p.CENTER);
-        this.p.image(this.image, 0, 0, 25, 25);
+
+        const image = this.enabled ? this.enabledImage : this.disabledImage;
+        this.enabled = false;
+
+        this.p.image(image, 0, 0, 50, 50);
     }
 }
