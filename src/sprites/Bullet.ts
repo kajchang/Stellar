@@ -4,9 +4,11 @@ export default class Bullet extends Sprite {
     private readonly directionX: number;
     private readonly directionY: number;
 
-    constructor(x: number, y: number, directionX: number, directionY: number, pointDirection: number) {
+    private readonly color: any;
+
+    constructor(x: number, y: number, directionX: number, directionY: number, pointDirection: number, color: any) {
         super();
-        //(Math.random() - 0.5 * 10)
+
         const dRadians = pointDirection * (Math.PI / 180);
 
         this.x = x;
@@ -14,6 +16,8 @@ export default class Bullet extends Sprite {
 
         this.directionX = 50 * Math.cos(dRadians) + directionX;
         this.directionY = 50 * Math.sin(dRadians) + directionY;
+
+        this.color = color;
     }
 
     init(): void {}
@@ -28,11 +32,11 @@ export default class Bullet extends Sprite {
     }
 
     draw(): void {
-        this.p.fill(255);
-        this.p.stroke(255);
+        this.p.fill(this.color);
+        this.p.stroke(this.color);
 
         this.p.translate(this.x, this.y);
 
-        this.p.rect(0, 0, 1, 2);
+        this.p.ellipse(0, 0, 1, 2);
     }
 }

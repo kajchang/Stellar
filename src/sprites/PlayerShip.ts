@@ -26,6 +26,7 @@ export default class PlayerShip extends Spaceship {
         this.turnAmount = 2;
 
         this.size = 50;
+        this.bulletColor = [0, 0, 255];
     }
 
     finished(): boolean {

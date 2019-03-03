@@ -15,6 +15,9 @@ export default class Camera extends Manager {
     execute(): void {
         this.p.push();
 
+        const xf = this.game.width / this.p.width;
+        const yf = this.game.height / this.p.height;
+
         let xTrans, yTrans;
 
         if (this.cameraFocus.x > this.game.width - this.p.width / 2) {

@@ -15,6 +15,7 @@ export default abstract class Spaceship extends Floater {
     protected turnAmount: number;
 
     protected size: number;
+    protected bulletColor: any;
 
     protected enabled = false;
 
@@ -52,14 +53,18 @@ export default abstract class Spaceship extends Floater {
 
         if (this.x >= this.game.width - this.size / 2) {
             this.x = this.game.width - this.size / 2;
+            this.directionY /= 2;
         } else if (this.x <= this.size / 2) {
             this.x = this.size / 2;
+            this.directionY /= 2;
         }
 
         if (this.y >= this.game.height - this.size / 2) {
             this.y = this.game.height - this.size / 2;
+            this.directionX /= 2;
         } else if (this.y <= this.size / 2) {
             this.y = this.size / 2;
+            this.directionX /= 2;
         }
     }
 
@@ -95,7 +100,7 @@ export default abstract class Spaceship extends Floater {
                 const xOffset = gun * Math.sin(dRadians);
                 const yOffset = gun * Math.cos(dRadians);
 
-                this.manager.addSprite(new Bullet(this.x + xOffset, this.y + yOffset, this.directionX, this.directionY, this.pointDirection));
+                this.manager.addSprite(new Bullet(this.x + xOffset, this.y + yOffset, this.directionX, this.directionY, this.pointDirection, this.bulletColor));
             }
         }
     }
