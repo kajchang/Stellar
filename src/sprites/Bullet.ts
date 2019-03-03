@@ -9,6 +9,9 @@ export default class Bullet extends Sprite {
     private size: number;
     private readonly color: any;
 
+    private lifespan = 60; // 1 sec at 60 fps
+    private deathTick: number;
+
     constructor(x: number, y: number, directionX: number, directionY: number, pointDirection: number, color: any) {
         super();
 
@@ -27,10 +30,11 @@ export default class Bullet extends Sprite {
 
     init(): void {
         this.size = this.p.width / 128;
+        this.deathTick = this.p.frameCount + this.lifespan;
     }
 
     finished(): boolean {
-        return this.x >= this.game.width || this.x <= 0 || this.y >= this.game.height || this.y <= 0;
+        return this.x >= this.game.width || this.x <= 0 || this.y >= this.game.height || this.y <= 0 || this.p.frameCount > this.deathTick;
     }
 
     update(): void {
