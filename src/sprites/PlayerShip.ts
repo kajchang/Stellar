@@ -18,14 +18,14 @@ export default class PlayerShip extends Spaceship {
 
         this.pointDirection = 0;
 
-        this.maxSpeed = 3;
         this.shotFrequency = 10;
         this.gunPositions = [15, -15];
-
-        this.acceleration = this.maxSpeed / 5;
         this.turnAmount = 2;
 
-        this.size = 50;
+        this.size = this.p.width / 25;
+        this.maxSpeed = this.size / 15;
+        this.acceleration = this.maxSpeed / 5;
+
         this.bulletColor = [0, 0, 255];
     }
 

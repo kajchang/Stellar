@@ -6,6 +6,7 @@ export default class Bullet extends Sprite {
 
     private readonly pointDirection: number;
 
+    private size: number;
     private readonly color: any;
 
     constructor(x: number, y: number, directionX: number, directionY: number, pointDirection: number, color: any) {
@@ -24,7 +25,9 @@ export default class Bullet extends Sprite {
         this.color = color;
     }
 
-    init(): void {}
+    init(): void {
+        this.size = this.p.width / 128;
+    }
 
     finished(): boolean {
         return this.x >= this.game.width || this.x <= 0 || this.y >= this.game.height || this.y <= 0;
@@ -45,6 +48,6 @@ export default class Bullet extends Sprite {
 
         this.p.rotate(dRadians);
 
-        this.p.ellipse(0, 0, 10, 2);
+        this.p.ellipse(0, 0, this.size, this.size / 5);
     }
 }
