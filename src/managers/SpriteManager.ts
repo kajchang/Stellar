@@ -1,17 +1,25 @@
 import * as p5 from 'p5';
 
 import Sprite from '../sprites/Sprite';
+import Manager from './Manager';
 
 // @ts-ignore
-export default class SpriteManager {
+export default class SpriteManager extends Manager {
     private readonly sprites: Sprite[];
     private readonly p: p5;
     private readonly background: any;
 
-    constructor(p: p5, background: any) {
+    readonly width: number;
+    readonly height: number;
+
+    constructor(p: p5, background: any, width: number, height: number) {
+        super(p);
+
         this.sprites = [];
-        this.p = p;
         this.background = background;
+
+        this.width = width;
+        this.height = height;
     }
 
     addSprite(sprite: Sprite): void {

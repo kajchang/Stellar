@@ -22,8 +22,6 @@ export default abstract class Spaceship extends Floater {
         const dRadians = this.pointDirection * (Math.PI / 180);
         this.p.rotate(dRadians);
 
-        this.p.imageMode(this.p.CENTER);
-
         const image = this.enabled ? this.enabledImage : this.disabledImage;
         this.enabled = false;
 
@@ -44,6 +42,22 @@ export default abstract class Spaceship extends Floater {
             this.directionY = this.maxSpeed;
         } else if (this.directionY < -this.maxSpeed) {
             this.directionY = -this.maxSpeed;
+        }
+    }
+
+    move(): void {
+        super.move();
+
+        if (this.x >= this.manager.width) {
+            this.x = this.manager.width;
+        } else if (this.x <= 0) {
+            this.x = 0;
+        }
+
+        if (this.y >= this.manager.height) {
+            this.y = this.manager.height;
+        } else if (this.y <= 0) {
+            this.y = 0;
         }
     }
 

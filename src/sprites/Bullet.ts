@@ -1,9 +1,6 @@
 import Sprite from './Sprite';
 
 export default class Bullet extends Sprite {
-    private x: number;
-    private y: number;
-
     private readonly directionX: number;
     private readonly directionY: number;
 
@@ -22,7 +19,7 @@ export default class Bullet extends Sprite {
     init(): void {}
 
     finished(): boolean {
-        return this.x >= this.p.width || this.x <= 0 || this.y >= this.p.height || this.y <= 0;
+        return this.x >= this.manager.width || this.x <= 0 || this.y >= this.manager.height || this.y <= 0;
     }
 
     update(): void {

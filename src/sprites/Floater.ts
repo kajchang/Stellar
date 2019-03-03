@@ -3,8 +3,6 @@ import Sprite from './Sprite';
 // Floater Logic ported from https://github.com/APCSLowell/AsteroidsGame/blob/master/Floater.pde
 
 export default abstract class Floater extends Sprite {
-    x: number;
-    y: number;
     directionX: number;
     directionY: number;
     pointDirection: number;
