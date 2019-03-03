@@ -31,23 +31,6 @@ export default abstract class Spaceship extends Floater {
         this.p.image(image, 0, 0, 50, 50);
     }
 
-    enable(): void {
-        this.enabled = true;
-    }
-
-    shoot(): void {
-        if (this.p.frameCount % this.shotFrequency == 0) {
-            const dRadians = this.pointDirection * (Math.PI / 180);
-
-            for (let gun of this.gunPositions) {
-                const xOffset = gun * Math.sin(dRadians);
-                const yOffset = gun * Math.cos(dRadians);
-
-                this.manager.addSprite(new Bullet(this.x + xOffset, this.y + yOffset, this.directionX, this.directionY, this.pointDirection));
-            }
-        }
-    }
-
     accelerate(dAmount: number): void {
         super.accelerate(dAmount);
 
@@ -61,6 +44,43 @@ export default abstract class Spaceship extends Floater {
             this.directionY = this.maxSpeed;
         } else if (this.directionY < -this.maxSpeed) {
             this.directionY = -this.maxSpeed;
+        }
+    }
+
+    enable(): void {
+        this.enabled = true;
+    }
+
+    turnLeft(): void {
+        this.turn(-this.turnAmount);
+        this.enable();
+    }
+
+    turnRight(): void {
+        this.turn(this.turnAmount);
+        this.enable();
+    }
+
+    accelerateForward(): void {
+        this.accelerate(this.acceleration);
+        this.enable();
+    }
+
+    accelerateBackward(): void {
+        this.accelerate(-this.acceleration);
+        this.enable();
+    }
+
+    shoot(): void {
+        if (this.p.frameCount % this.shotFrequency == 0) {
+            const dRadians = this.pointDirection * (Math.PI / 180);
+
+            for (let gun of this.gunPositions) {
+                const xOffset = gun * Math.sin(dRadians);
+                const yOffset = gun * Math.cos(dRadians);
+
+                this.manager.addSprite(new Bullet(this.x + xOffset, this.y + yOffset, this.directionX, this.directionY, this.pointDirection));
+            }
         }
     }
 }

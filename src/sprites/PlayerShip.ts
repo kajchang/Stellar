@@ -32,23 +32,19 @@ export default class PlayerShip extends Spaceship {
 
     update(): void {
         if (this.p.keyIsDown(38)) {
-            this.accelerate(this.acceleration);
-            this.enable();
+            this.accelerateForward();
         }
 
         if (this.p.keyIsDown(40)) {
-            this.accelerate(-this.acceleration);
-            this.enable();
+            this.accelerateBackward();
         }
 
         if (this.p.keyIsDown(37)) {
-            this.turn(-this.turnAmount);
-            this.enable();
+            this.turnLeft();
         }
 
         if (this.p.keyIsDown(39)) {
-            this.turn(this.turnAmount);
-            this.enable();
+            this.turnRight();
         }
 
         if (this.p.keyIsDown(32)) {
