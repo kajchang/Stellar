@@ -9,7 +9,7 @@ import PlayerShip from './sprites/PlayerShip';
 import Star from './sprites/Star';
 
 const sketch = (p: p5) => {
-    const game = new Game(p.windowWidth * 2, p.windowHeight * 2);
+    const game = new Game(p.windowWidth * 4, p.windowHeight * 4);
 
     const ship = new PlayerShip();
 

@@ -21,7 +21,7 @@ export default class Camera extends Manager {
         let xTrans, yTrans;
 
         if (this.cameraFocus.x > this.game.width - this.p.width / 2) {
-            xTrans = -this.game.width / 2;
+            xTrans = -this.game.width * (xf - 1) / xf;
         } else if (this.cameraFocus.x < this.p.width / 2) {
             xTrans = 0;
         } else {
@@ -29,7 +29,7 @@ export default class Camera extends Manager {
         }
 
         if (this.cameraFocus.y > this.game.height - this.p.height / 2) {
-            yTrans = -this.game.height / 2;
+            yTrans = -this.game.height * (yf - 1) / yf;
         } else if (this.cameraFocus.y < this.p.height / 2) {
             yTrans = 0;
         } else {
