@@ -11,6 +11,9 @@ export default abstract class Spaceship extends Floater {
     protected shotFrequency: number;
     protected gunPositions: number[];
 
+    protected acceleration: number;
+    protected turnAmount: number;
+
     protected enabled = false;
 
     draw(): void {

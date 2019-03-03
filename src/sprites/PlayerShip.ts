@@ -21,6 +21,9 @@ export default class PlayerShip extends Spaceship {
         this.maxSpeed = 3;
         this.shotFrequency = 10;
         this.gunPositions = [15, -15];
+
+        this.acceleration = this.maxSpeed / 5;
+        this.turnAmount = 2;
     }
 
     finished(): boolean {
@@ -29,22 +32,22 @@ export default class PlayerShip extends Spaceship {
 
     update(): void {
         if (this.p.keyIsDown(38)) {
-            this.accelerate(this.maxSpeed / 5);
+            this.accelerate(this.acceleration);
             this.enable();
         }
 
         if (this.p.keyIsDown(40)) {
-            this.accelerate(-this.maxSpeed / 5);
+            this.accelerate(-this.acceleration);
             this.enable();
         }
 
         if (this.p.keyIsDown(37)) {
-            this.turn(-2);
+            this.turn(-this.turnAmount);
             this.enable();
         }
 
         if (this.p.keyIsDown(39)) {
-            this.turn(2);
+            this.turn(this.turnAmount);
             this.enable();
         }
 
