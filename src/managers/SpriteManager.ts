@@ -1,6 +1,6 @@
 import * as p5 from 'p5';
 
-import Sprite from './Sprite';
+import Sprite from '../sprites/Sprite';
 
 // @ts-ignore
 export default class SpriteManager {

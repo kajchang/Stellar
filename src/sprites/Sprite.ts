@@ -1,6 +1,6 @@
 import * as p5 from 'p5';
 
-import SpriteManager from './SpriteManager';
+import SpriteManager from '../managers/SpriteManager';
 
 export default abstract class Sprite {
     manager: SpriteManager;
