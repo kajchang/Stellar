@@ -6,13 +6,12 @@ export default class Bullet extends Sprite {
 
     private readonly pointDirection: number;
 
-    private size: number;
-    private readonly color: any;
+    readonly color: any;
 
     private lifespan = 60; // 1 sec at 60 fps
     private deathTick: number;
 
-    type = "BULLET";
+    type = 'BULLET';
 
     constructor(x: number, y: number, directionX: number, directionY: number, pointDirection: number, color: any) {
         super();
@@ -31,7 +30,6 @@ export default class Bullet extends Sprite {
     }
 
     init(): void {
-        this.size = this.p.width / 128;
         this.deathTick = this.p.frameCount + this.lifespan;
     }
 
@@ -54,6 +52,11 @@ export default class Bullet extends Sprite {
 
         this.p.rotate(dRadians);
 
-        this.p.ellipse(0, 0, this.size, this.size / 5);
+        this.p.ellipseMode(this.p.CENTER);
+        this.p.ellipse(0, 0, 10, 2);
+    }
+
+    collisionVector(): number[] {
+        return [this.x, this.y, 10, 2];
     }
 }

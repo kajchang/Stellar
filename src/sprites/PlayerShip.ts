@@ -23,13 +23,13 @@ export default class PlayerShip extends Spaceship {
         this.maxSpeed = 5;
         this.acceleration = this.maxSpeed / 5;
 
-        this.bulletColor = [0, 0, 255];
+        this.secondaryColor = [0, 0, 255];
 
         this.x = this.game.width / 2 + this.size;
         this.y = this.game.height / 2;
 
-        this.health = 100;
-        this.maxHealth = 100;
+        this.health = 10;
+        this.maxHealth = 10;
     }
 
     update(): void {

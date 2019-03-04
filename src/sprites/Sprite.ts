@@ -11,10 +11,11 @@ export default abstract class Sprite {
     x: number;
     y: number;
 
-    type = "SPRITE";
+    type = 'SPRITE';
 
     abstract init(): void
     abstract finished(): boolean
     abstract update(): void
     abstract draw(): void
+    abstract collisionVector(): number[];
 }

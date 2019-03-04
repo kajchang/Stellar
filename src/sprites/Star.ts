@@ -17,4 +17,9 @@ export default class Star extends Sprite {
 
         this.p.ellipse(0, 0, 5)
     }
+
+    // what's the chance?
+    collisionVector(): number[] {
+        return [];
+    }
 }

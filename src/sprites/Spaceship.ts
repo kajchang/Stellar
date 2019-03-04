@@ -15,7 +15,7 @@ export default abstract class Spaceship extends Floater {
     protected turnAmount: number;
 
     protected size: number;
-    protected bulletColor: any;
+    protected secondaryColor: any;
 
     protected enabled = false;
     private lastShot: number;
@@ -23,7 +23,7 @@ export default abstract class Spaceship extends Floater {
     protected health: number;
     protected maxHealth: number;
 
-    type = "SPACESHIP";
+    type = 'SPACESHIP';
 
     finished(): boolean {
         return this.health < 0;
@@ -35,6 +35,15 @@ export default abstract class Spaceship extends Floater {
         }
 
         this.move();
+
+        const collisions = this.manager.checkCollision<Bullet>(this, 'BULLET');
+
+        for (let collision of collisions) {
+            if (collision.color != this.secondaryColor) {
+                this.manager.removeSprite(collision);
+                this.health--;
+            }
+        }
     }
 
     draw(): void {
@@ -47,7 +56,7 @@ export default abstract class Spaceship extends Floater {
 
         this.p.rectMode(this.p.CORNER);
 
-        this.p.fill(this.bulletColor);
+        this.p.fill(this.secondaryColor);
         this.p.rect(-55 / 2 + 7 / 2, -this.size / 2 - 10 - 7 / 2, 48 * this.health / this.maxHealth, 8);
 
         const dRadians = this.pointDirection * (Math.PI / 180);
@@ -128,10 +137,14 @@ export default abstract class Spaceship extends Floater {
                 const xOffset = gun * Math.sin(dRadians);
                 const yOffset = gun * Math.cos(dRadians);
 
-                this.manager.addSprite(new Bullet(this.x + xOffset, this.y + yOffset, this.directionX, this.directionY, this.pointDirection, this.bulletColor));
+                this.manager.addSprite(new Bullet(this.x + xOffset, this.y + yOffset, this.directionX, this.directionY, this.pointDirection, this.secondaryColor));
             }
 
             this.lastShot = this.shotFrequency;
         }
+    }
+
+    collisionVector(): number[] {
+        return [this.x, this.y, this.size, this.size];
     }
 }

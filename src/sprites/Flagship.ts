@@ -23,10 +23,10 @@ export default class Flagship extends Spaceship {
         this.maxSpeed = this.size / 100;
         this.acceleration = this.maxSpeed / 5;
 
-        this.bulletColor = [255, 0, 0];
+        this.secondaryColor = [255, 0, 0];
 
-        this.health = 1000;
-        this.maxHealth = 1000;
+        this.health = 25;
+        this.maxHealth = 25;
     }
 
     update(): void {
