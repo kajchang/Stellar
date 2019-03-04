@@ -7,28 +7,30 @@ import Camera from './managers/Camera';
 
 import PlayerShip from './sprites/PlayerShip';
 import Star from './sprites/Star';
-import Flagship from "./sprites/Flagship";
+import Flagship from './sprites/Flagship';
+import MiniMap from './sprites/MiniMap';
 
 const sketch = (p: p5) => {
     const game = new Game(p.windowWidth * 4, p.windowHeight * 4);
 
-    const ship = new PlayerShip();
-
-    const spriteManager = new SpriteManager(p, 0);
-    const camera = new Camera(p, ship);
-
     p.setup = function() {
         p.createCanvas(p.windowWidth, p.windowHeight);
 
+        const ship = new PlayerShip();
+
+        const gameSpriteManager = new SpriteManager(p, 0);
+        const camera = new Camera(p, ship);
+
         game.addManager(camera);
-        game.addManager(spriteManager);
+        game.addManager(gameSpriteManager);
 
         for (let i = 0; i < 100; i++) {
-            spriteManager.addSprite(new Star);
+            gameSpriteManager.addSprite(new Star, 0);
         }
 
-        spriteManager.addSprite(ship);
-        spriteManager.addSprite(new Flagship());
+        gameSpriteManager.addSprite(ship, 1);
+        gameSpriteManager.addSprite(new Flagship(), 1);
+        gameSpriteManager.addSprite(new MiniMap(), 2);
     };
 
     p.draw = function () {

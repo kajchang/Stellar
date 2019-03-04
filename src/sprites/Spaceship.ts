@@ -15,7 +15,7 @@ export default abstract class Spaceship extends Floater {
     protected turnAmount: number;
 
     protected size: number;
-    protected secondaryColor: any;
+    secondaryColor: any;
 
     protected enabled = false;
     private lastShot: number;
@@ -36,11 +36,11 @@ export default abstract class Spaceship extends Floater {
 
         this.move();
 
-        const collisions = this.manager.checkCollision<Bullet>(this, 'BULLET');
+        const collisions = this.manager.checkCollision<Bullet>(this, 'BULLET', 1);
 
         for (let collision of collisions) {
             if (collision.color != this.secondaryColor) {
-                this.manager.removeSprite(collision);
+                this.manager.removeSprite(collision, 1);
                 this.health--;
             }
         }
@@ -131,20 +131,13 @@ export default abstract class Spaceship extends Floater {
 
     shoot(): void {
         if (this.lastShot == null || this.lastShot == 0) {
-            const dRadians = this.pointDirection * (Math.PI / 180);
-
-            for (let gun of this.gunPositions) {
-                const xOffset = gun * Math.sin(dRadians);
-                const yOffset = gun * Math.cos(dRadians);
-
-                this.manager.addSprite(new Bullet(this.x + xOffset, this.y + yOffset, this.directionX, this.directionY, this.pointDirection, this.secondaryColor));
-            }
+            this.manager.addSprite(new Bullet(this.x, this.y, this.directionX, this.directionY, this.pointDirection, this.secondaryColor), 1);
 
             this.lastShot = this.shotFrequency;
         }
     }
 
-    collisionVector(): number[] {
+    collisionVector(): [number, number, number, number] {
         return [this.x, this.y, this.size, this.size];
     }
 }

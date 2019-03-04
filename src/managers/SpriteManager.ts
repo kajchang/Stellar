@@ -9,39 +9,43 @@ interface Map<V> {
 
 // @ts-ignore
 export default class SpriteManager extends Manager {
-    private readonly sprites: Map<Sprite[]>;
+    private readonly sprites: Map<Sprite[]>[];
     private readonly background: any;
+
+    type = "SPRITEMANAGER";
 
     constructor(p: p5, background: any) {
         super(p);
 
-        this.sprites = {};
+        this.sprites = [];
         this.background = background;
     }
 
-    addSprite(sprite: Sprite): void {
-        if (this.sprites[sprite.type] == undefined) {
-            this.sprites[sprite.type] = [];
+    addSprite(sprite: Sprite, layer: number): void {
+        if (this.sprites[layer] == undefined) {
+            this.sprites[layer] = {};
         }
 
-        this.sprites[sprite.type].push(sprite);
+        if (this.sprites[layer][sprite.type] == undefined) {
+            this.sprites[layer][sprite.type] = [];
+        }
+
+        this.sprites[layer][sprite.type].push(sprite);
         sprite.manager = this;
         sprite.game = this.game;
         sprite.p = this.p;
         sprite.init();
     }
 
-    removeSprite(sprite: Sprite): void {
-        if (this.sprites[sprite.type] == undefined) return;
-        this.sprites[sprite.type].splice(this.sprites[sprite.type].indexOf(sprite), 1);
+    removeSprite(sprite: Sprite, layer: number): void {
+        if (this.sprites[layer] == undefined || this.sprites[layer][sprite.type] == undefined) return;
+        this.sprites[layer][sprite.type].splice(this.sprites[layer][sprite.type].indexOf(sprite), 1);
     }
 
-    checkCollision<Type extends Sprite>(source: Sprite, type: string): Type[] {
-        if (this.sprites[type] == undefined) return [];
-
+    checkCollision<Type extends Sprite>(source: Sprite, type: string, layer: number): Type[] {
         const res: Type[] = [];
 
-        for (let targetSprite of this.sprites[type]) {
+        for (let targetSprite of this.getTypeOfSprites<Type>(type, layer)) {
             // basic rectangle collision
 
             const sourceCollisionVector = source.collisionVector();
@@ -60,26 +64,32 @@ export default class SpriteManager extends Manager {
         return res;
     }
 
+    getTypeOfSprites<Type extends Sprite>(type: string, layer: number): Type[] {
+        return this.sprites[layer] == undefined || this.sprites[layer][type] == undefined? [] : this.sprites[layer][type] as Type[];
+    }
+
     execute(): void {
         this.p.background(this.background);
 
-        Object.keys(this.sprites).forEach(type => {
-            for (let i = 0; i < this.sprites[type].length; i++) {
-                this.p.push();
+        for (let layer of this.sprites) {
+            Object.keys(layer).forEach(type => {
+                for (let i = 0; i < layer[type].length; i++) {
+                    this.p.push();
 
-                const sprite = this.sprites[type][i];
+                    const sprite = layer[type][i];
 
-                sprite.update();
+                    sprite.update();
 
-                if (sprite.finished()) {
-                    this.sprites[type].splice(i, 1);
+                    if (sprite.finished()) {
+                        layer[type].splice(i, 1);
+                    }
+
+                    sprite.draw();
+
+                    this.p.pop();
                 }
-
-                sprite.draw();
-
-                this.p.pop();
-            }
-        });
+            });
+        }
     }
 
     cleanup(): void {}

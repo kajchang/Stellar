@@ -56,7 +56,7 @@ export default class Bullet extends Sprite {
         this.p.ellipse(0, 0, 10, 2);
     }
 
-    collisionVector(): number[] {
+    collisionVector(): [number, number, number, number] {
         return [this.x, this.y, 10, 2];
     }
 }

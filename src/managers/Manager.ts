@@ -5,6 +5,8 @@ export default abstract class Manager {
     protected p: p5;
     game: Game;
 
+    type: string;
+
     protected constructor(p: p5) {
         this.p = p;
     }

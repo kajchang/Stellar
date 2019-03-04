@@ -4,7 +4,9 @@ import Manager from './Manager';
 import Sprite from '../sprites/Sprite';
 
 export default class Camera extends Manager {
-    private cameraFocus: Sprite;
+    cameraFocus: Sprite;
+
+    type = "CAMERA";
 
     constructor(p: p5, cameraFocus: Sprite) {
         super(p);
@@ -12,9 +14,7 @@ export default class Camera extends Manager {
         this.cameraFocus = cameraFocus;
     }
 
-    execute(): void {
-        this.p.push();
-
+    getCenter(): [number, number] {
         const xf = this.game.width / this.p.width;
         const yf = this.game.height / this.p.height;
 
@@ -35,6 +35,14 @@ export default class Camera extends Manager {
         } else {
             yTrans = -this.cameraFocus.y + this.p.height / 2;
         }
+
+        return [xTrans, yTrans]
+    }
+
+    execute(): void {
+        this.p.push();
+
+        let [xTrans, yTrans] = this.getCenter();
 
         this.p.translate(xTrans, yTrans);
     }

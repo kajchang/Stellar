@@ -17,5 +17,5 @@ export default abstract class Sprite {
     abstract finished(): boolean
     abstract update(): void
     abstract draw(): void
-    abstract collisionVector(): number[];
+    abstract collisionVector(): [number, number, number, number];
 }
