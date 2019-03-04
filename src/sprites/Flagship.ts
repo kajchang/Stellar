@@ -17,9 +17,9 @@ export default class Flagship extends Spaceship {
         this.directionY = 0;
 
         this.pointDirection = 180;
-        this.turnAmount = 1;
+        this.turnAmount = 0.5;
 
-        this.size = this.p.width / 10;
+        this.size = 100;
         this.maxSpeed = this.size / 100;
         this.acceleration = this.maxSpeed / 5;
     }
