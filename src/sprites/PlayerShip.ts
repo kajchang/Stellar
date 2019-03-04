@@ -22,7 +22,7 @@ export default class PlayerShip extends Spaceship {
         this.gunPositions = [15, -15];
         this.turnAmount = 2;
 
-        this.size = this.p.width / 25;
+        this.size = this.p.width / 30;
         this.maxSpeed = this.size / 15;
         this.acceleration = this.maxSpeed / 5;
 
@@ -55,7 +55,5 @@ export default class PlayerShip extends Spaceship {
         if (this.p.keyIsDown(32)) {
             this.shoot();
         }
-
-        this.move();
     }
 }

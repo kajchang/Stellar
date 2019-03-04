@@ -24,6 +24,8 @@ export default abstract class Spaceship extends Floater {
         if (this.lastShot > 0) {
             this.lastShot--;
         }
+
+        this.move();
     }
 
     draw(): void {

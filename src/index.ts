@@ -7,6 +7,7 @@ import Camera from './managers/Camera';
 
 import PlayerShip from './sprites/PlayerShip';
 import Star from './sprites/Star';
+import Flagship from "./sprites/Flagship";
 
 const sketch = (p: p5) => {
     const game = new Game(p.windowWidth * 4, p.windowHeight * 4);
@@ -27,6 +28,7 @@ const sketch = (p: p5) => {
         }
 
         spriteManager.addSprite(ship);
+        spriteManager.addSprite(new Flagship());
     };
 
     p.draw = function () {
