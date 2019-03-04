@@ -12,6 +12,8 @@ export default class Bullet extends Sprite {
     private lifespan = 60; // 1 sec at 60 fps
     private deathTick: number;
 
+    type = "BULLET";
+
     constructor(x: number, y: number, directionX: number, directionY: number, pointDirection: number, color: any) {
         super();
 

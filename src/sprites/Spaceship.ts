@@ -23,6 +23,8 @@ export default abstract class Spaceship extends Floater {
     protected health: number;
     protected maxHealth: number;
 
+    type = "SPACESHIP";
+
     finished(): boolean {
         return this.health < 0;
     }

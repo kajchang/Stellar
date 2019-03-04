@@ -11,6 +11,8 @@ export default abstract class Sprite {
     x: number;
     y: number;
 
+    type = "SPRITE";
+
     abstract init(): void
     abstract finished(): boolean
     abstract update(): void
