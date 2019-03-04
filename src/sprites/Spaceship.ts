@@ -20,6 +20,13 @@ export default abstract class Spaceship extends Floater {
     protected enabled = false;
     private lastShot: number;
 
+    protected health: number;
+    protected maxHealth: number;
+
+    finished(): boolean {
+        return this.health < 0;
+    }
+
     update(): void {
         if (this.lastShot > 0) {
             this.lastShot--;
@@ -30,6 +37,16 @@ export default abstract class Spaceship extends Floater {
 
     draw(): void {
         this.p.translate(this.x, this.y);
+
+        this.p.rectMode(this.p.CENTER);
+
+        this.p.fill(100);
+        this.p.rect(0, -this.size / 2 - 10, 55, 15);
+
+        this.p.rectMode(this.p.CORNER);
+
+        this.p.fill(this.bulletColor);
+        this.p.rect(-55 / 2 + 7 / 2, -this.size / 2 - 10 - 7 / 2, 48 * this.health / this.maxHealth, 8);
 
         const dRadians = this.pointDirection * (Math.PI / 180);
         this.p.rotate(dRadians);
@@ -60,19 +77,19 @@ export default abstract class Spaceship extends Floater {
     move(): void {
         super.move();
 
-        if (this.x >= this.game.width - this.size / 2) {
-            this.x = this.game.width - this.size / 2;
+        if (this.x >= this.game.width - this.size / 2 - 20) {
+            this.x = this.game.width - this.size / 2 - 20;
             this.directionY /= 2;
-        } else if (this.x <= this.size / 2) {
-            this.x = this.size / 2;
+        } else if (this.x <= this.size / 2 + 20) {
+            this.x = this.size / 2 + 20;
             this.directionY /= 2;
         }
 
-        if (this.y >= this.game.height - this.size / 2) {
-            this.y = this.game.height - this.size / 2;
+        if (this.y >= this.game.height - this.size / 2 - 20) {
+            this.y = this.game.height - this.size / 2 - 20;
             this.directionX /= 2;
-        } else if (this.y <= this.size / 2) {
-            this.y = this.size / 2;
+        } else if (this.y <= this.size / 2 + 20) {
+            this.y = this.size / 2 + 20;
             this.directionX /= 2;
         }
     }
