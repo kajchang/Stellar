@@ -12,6 +12,7 @@ export default class Camera extends Manager {
         super(p);
 
         this.cameraFocus = cameraFocus;
+        this.cameraFocus.focus = true;
     }
 
     getCenter(): [number, number] {
@@ -41,6 +42,8 @@ export default class Camera extends Manager {
 
     execute(): void {
         this.p.push();
+
+        this.cameraFocus.update();
 
         let [xTrans, yTrans] = this.getCenter();
 

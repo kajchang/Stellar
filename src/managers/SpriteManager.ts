@@ -10,15 +10,13 @@ interface Map<V> {
 // @ts-ignore
 export default class SpriteManager extends Manager {
     private readonly sprites: Map<Sprite[]>[];
-    private readonly background: any;
 
     type = "SPRITEMANAGER";
 
-    constructor(p: p5, background: any) {
+    constructor(p: p5) {
         super(p);
 
         this.sprites = [];
-        this.background = background;
     }
 
     addSprite(sprite: Sprite, layer: number): void {
@@ -69,21 +67,20 @@ export default class SpriteManager extends Manager {
     }
 
     execute(): void {
-        this.p.background(this.background);
-
         for (let layer of this.sprites) {
             Object.keys(layer).forEach(type => {
                 for (let i = 0; i < layer[type].length; i++) {
-                    this.p.push();
-
                     const sprite = layer[type][i];
 
-                    sprite.update();
+                    if (!sprite.focus) {
+                        sprite.update();
+                    }
+
+                    this.p.push();
 
                     if (sprite.finished()) {
                         layer[type].splice(i, 1);
                     }
-
                     sprite.draw();
 
                     this.p.pop();

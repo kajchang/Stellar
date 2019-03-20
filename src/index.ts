@@ -11,18 +11,15 @@ import Flagship from './sprites/Flagship';
 import MiniMap from './sprites/MiniMap';
 
 const sketch = (p: p5) => {
-    const game = new Game(p.windowWidth * 4, p.windowHeight * 4);
+    const ship = new PlayerShip();
+
+    const gameSpriteManager = new SpriteManager(p);
+    const camera = new Camera(p, ship);
+
+    const game = new Game(p, p.windowWidth * 4, p.windowHeight * 4, 0, gameSpriteManager, camera);
 
     p.setup = function() {
         p.createCanvas(p.windowWidth, p.windowHeight);
-
-        const ship = new PlayerShip();
-
-        const gameSpriteManager = new SpriteManager(p, 0);
-        const camera = new Camera(p, ship);
-
-        game.addManager(camera);
-        game.addManager(gameSpriteManager);
 
         for (let i = 0; i < 100; i++) {
             gameSpriteManager.addSprite(new Star, 0);

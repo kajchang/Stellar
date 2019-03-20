@@ -1,40 +1,51 @@
+import * as p5 from 'p5';
+
 import Manager from './managers/Manager';
+import SpriteManager from './managers/SpriteManager';
+import Camera from './managers/Camera';
 
 interface Map<V> {
     [K: string]: V;
 }
 
 export default class Game {
+    private readonly p: p5;
+
     readonly width: number;
     readonly height: number;
 
-    private readonly managers: Map<Manager>;
+    private readonly background: any;
 
-    constructor(width: number, height: number) {
+    private readonly spriteManager: SpriteManager;
+    private readonly camera: Camera;
+
+    constructor(p: p5, width: number, height: number, background: any, spriteManager: SpriteManager, camera: Camera) {
+        this.p = p;
+
         this.width = width;
         this.height = height;
 
-        this.managers = {};
-    }
+        this.background = background;
 
-    addManager(manager: Manager): void {
-        manager.game = this;
-        this.managers[manager.type] = manager;
+        this.spriteManager = spriteManager;
+        this.camera = camera;
+
+        this.spriteManager.game = this;
+        this.camera.game = this;
     }
 
     executeManagers(): void {
-        for (let manager of Object.keys(this.managers)) {
-            this.managers[manager].execute();
-        }
+        this.p.background(this.background);
+        this.camera.execute();
+        this.spriteManager.execute();
     }
 
     cleanupManagers(): void {
-        for (let manager of Object.keys(this.managers)) {
-            this.managers[manager].cleanup();
-        }
+        this.camera.cleanup();
+        this.spriteManager.cleanup();
     }
 
     getManager<Type extends Manager>(type: string): Type {
-        return this.managers[type] as Type;
+        return [this.camera, this.spriteManager].find(manager => manager.type == type) as unknown as Type;
     }
 }

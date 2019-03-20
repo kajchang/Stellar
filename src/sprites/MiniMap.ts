@@ -1,6 +1,5 @@
 import Sprite from './Sprite';
 import Camera from '../managers/Camera';
-import SpriteManager from '../managers/SpriteManager';
 import Spaceship from './Spaceship';
 
 export default class MiniMap extends Sprite {
@@ -13,12 +12,14 @@ export default class MiniMap extends Sprite {
     draw(): void {
         const [x, y] = this.game.getManager<Camera>('CAMERA').getCenter();
 
+        this.p.fill(255);
+
         this.p.translate(-x + this.p.width - 100 * this.p.width / this.p.height, -y);
 
         this.p.strokeWeight(0);
         this.p.ellipseMode(this.p.CENTER);
 
-        for (let ship of this.game.getManager<SpriteManager>("SPRITEMANAGER").getTypeOfSprites<Spaceship>("SPACESHIP", 1)) {
+        for (let ship of this.manager.getTypeOfSprites<Spaceship>('SPACESHIP', 1)) {
             this.p.fill(ship.secondaryColor);
             this.p.ellipse(ship.x * (100 * this.p.width / this.p.height / this.game.width) - 3, ship.y * (100 / this.game.height) + 3, 10);
         }
