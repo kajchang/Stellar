@@ -3,6 +3,8 @@ import Camera from '../managers/Camera';
 import Spaceship from './Spaceship';
 
 export default class MiniMap extends Sprite {
+    static SHIP_WIDTH = 10;
+
     init(): void {}
 
     finished(): boolean {
@@ -17,13 +19,14 @@ export default class MiniMap extends Sprite {
 
         this.p.translate(-x + this.p.width - 100 * this.p.width / this.p.height, -y);
 
-        this.p.rect(-5, 0, this.p.width - 100 * this.p.width / this.p.height + 5, 110);
+        this.p.rect(-MiniMap.SHIP_WIDTH / 2, 0, this.p.width - 100 * this.p.width / this.p.height + MiniMap.SHIP_WIDTH / 2, 100 + MiniMap.SHIP_WIDTH);
 
         this.p.ellipseMode(this.p.CENTER);
 
         for (let ship of this.manager.getTypeOfSprites<Spaceship>('SPACESHIP', 1)) {
             this.p.fill(ship.secondaryColor);
-            this.p.ellipse(ship.x * (100 * this.p.width / this.p.height / this.game.width) - 5, ship.y * (100 / this.game.height) + 5, 10);
+            this.p.ellipse(ship.x * (100 * this.p.width / this.p.height / this.game.width) - MiniMap.SHIP_WIDTH / 2,
+                           ship.y * (100 / this.game.height) + MiniMap.SHIP_WIDTH / 2, MiniMap.SHIP_WIDTH);
         }
     }
 

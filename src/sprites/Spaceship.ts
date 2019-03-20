@@ -1,5 +1,7 @@
 import * as p5 from 'p5';
 
+import Layers from '../Layers';
+
 import Floater from './Floater';
 import Bullet from './Bullet';
 
@@ -36,11 +38,11 @@ export default abstract class Spaceship extends Floater {
 
         this.move();
 
-        const collisions = this.manager.checkCollision<Bullet>(this, 'BULLET', 1);
+        const collisions = this.manager.checkCollision<Bullet>(this, 'BULLET', Layers.FOREGROUND);
 
         for (let collision of collisions) {
             if (collision.color != this.secondaryColor) {
-                this.manager.removeSprite(collision, 1);
+                this.manager.removeSprite(collision, Layers.FOREGROUND);
                 this.health--;
             }
         }
@@ -131,7 +133,7 @@ export default abstract class Spaceship extends Floater {
 
     shoot(): void {
         if (this.lastShot == null || this.lastShot == 0) {
-            this.manager.addSprite(new Bullet(this.x, this.y, this.directionX, this.directionY, this.pointDirection, this.secondaryColor), 1);
+            this.manager.addSprite(new Bullet(this.x, this.y, this.directionX, this.directionY, this.pointDirection, this.secondaryColor), Layers.FOREGROUND);
 
             this.lastShot = this.shotFrequency;
         }

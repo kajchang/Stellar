@@ -4,6 +4,7 @@ import Game from './Game';
 
 import SpriteManager from './managers/SpriteManager';
 import Camera from './managers/Camera';
+import Layers from './Layers';
 
 import PlayerShip from './sprites/PlayerShip';
 import Star from './sprites/Star';
@@ -22,12 +23,12 @@ const sketch = (p: p5) => {
         p.createCanvas(p.windowWidth, p.windowHeight);
 
         for (let i = 0; i < 100; i++) {
-            gameSpriteManager.addSprite(new Star, 0);
+            gameSpriteManager.addSprite(new Star, Layers.BACKGROUND);
         }
 
         gameSpriteManager.addSprite(ship, 1);
-        gameSpriteManager.addSprite(new Flagship(), 1);
-        gameSpriteManager.addSprite(new MiniMap(), 2);
+        gameSpriteManager.addSprite(new Flagship(), Layers.FOREGROUND);
+        gameSpriteManager.addSprite(new MiniMap(), Layers.UI);
     };
 
     p.draw = function () {
