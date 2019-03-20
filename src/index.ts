@@ -34,6 +34,11 @@ const sketch = (p: p5) => {
         game.executeManagers();
         game.cleanupManagers();
     };
+
+    p.windowResized = function () {
+        p.resizeCanvas(p.windowWidth, p.windowHeight);
+
+    }
 };
 
 new p5(sketch);
