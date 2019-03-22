@@ -12,6 +12,7 @@ export default abstract class Sprite {
     y: number;
 
     focus = false;
+    active = true;
 
     type = 'SPRITE';
 

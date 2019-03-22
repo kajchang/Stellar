@@ -12,12 +12,18 @@ import Flagship from './sprites/Flagship';
 import MiniMap from './sprites/MiniMap';
 
 const sketch = (p: p5) => {
-    const ship = new PlayerShip();
+    let ship: PlayerShip, gameSpriteManager: SpriteManager, camera: Camera, game: Game, font: p5.Font;
 
-    const gameSpriteManager = new SpriteManager(p);
-    const camera = new Camera(p, ship);
+    p.preload = function() {
+        font = p.loadFont('Azonix.otf');
 
-    const game = new Game(p, p.windowWidth * 4, p.windowHeight * 4, 0, gameSpriteManager, camera);
+        ship = new PlayerShip();
+
+        gameSpriteManager = new SpriteManager(p);
+        camera = new Camera(p, ship);
+
+        game = new Game(p, p.windowWidth * 6, p.windowWidth * 6, 0, gameSpriteManager, camera);
+    };
 
     p.setup = function() {
         p.createCanvas(p.windowWidth, p.windowHeight);
@@ -32,8 +38,24 @@ const sketch = (p: p5) => {
     };
 
     p.draw = function () {
-        game.executeManagers();
-        game.cleanupManagers();
+        if (game.started) {
+            game.executeManagers();
+            game.cleanupManagers();
+            if (!game.camera.cameraFocus.active) {
+                p.preload();
+                p.setup();
+            }
+        } else {
+            p.background(0);
+            p.textAlign(p.CENTER);
+            p.fill(255);
+            p.textFont('Azonix');
+            p.textSize(p.width / 25);
+            p.text('Press RETURN to Start.', p.width / 2, p.height / 2);
+            if (p.keyIsDown(13)) {
+                game.started = true;
+            }
+        }
     };
 
     p.windowResized = function () {

@@ -1,6 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
     entry: './src/index.ts',
@@ -39,6 +40,10 @@ module.exports = {
             filename: 'index.html',
             template: path.join(__dirname, 'src', 'web', 'index.html')
         }),
+        new CopyWebpackPlugin([{
+           from: './src/web',
+           to: '.'
+        }]),
         new webpack.NamedModulesPlugin(),
         new webpack.HotModuleReplacementPlugin()
     ]

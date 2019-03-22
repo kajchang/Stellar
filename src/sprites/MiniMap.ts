@@ -19,8 +19,6 @@ export default class MiniMap extends Sprite {
 
         this.p.translate(-x + this.p.width - 100 * this.p.width / this.p.height, -y);
 
-        this.p.rect(-MiniMap.SHIP_WIDTH / 2, 0, this.p.width - 100 * this.p.width / this.p.height + MiniMap.SHIP_WIDTH / 2, 100 + MiniMap.SHIP_WIDTH);
-
         this.p.ellipseMode(this.p.CENTER);
 
         for (let ship of this.manager.getTypeOfSprites<Spaceship>('SPACESHIP', 1)) {

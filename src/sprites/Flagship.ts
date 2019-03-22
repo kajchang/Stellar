@@ -1,17 +1,15 @@
 // @ts-ignore
-import flagshipEnabled from '../assets/flagship_enabled.png';
-// @ts-ignore
-import flagshipDisabled from '../assets/flagship_disabled.png';
+import flagship_image from '../assets/flagship.png';
 
-import Spaceship from './Spaceship';
+import BirthingShip from './BirthingShip';
+import EnemyShip from './EnemyShip';
 
-export default class Flagship extends Spaceship {
+export default class Flagship extends BirthingShip {
     init(): void {
-        this.enabledImage = this.p.loadImage(flagshipEnabled);
-        this.disabledImage = this.p.loadImage(flagshipDisabled);
+        this.image = this.p.loadImage(flagship_image);
 
-        this.x = this.game.width / 2;
-        this.y = this.game.height / 2;
+        this.x = this.game.width * 3 / 4;
+        this.y = this.game.height * 3 / 4;
 
         this.directionX = 0;
         this.directionY = 0;
@@ -25,8 +23,13 @@ export default class Flagship extends Spaceship {
 
         this.secondaryColor = [255, 0, 0];
 
-        this.health = 25;
-        this.maxHealth = 25;
+        this.health = 100;
+        this.maxHealth = this.health;
+
+        this.birthingRate = 600;
+        this.childType = EnemyShip;
+
+        // this.gunPositions = [10, -10];
     }
 
     update(): void {

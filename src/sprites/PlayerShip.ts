@@ -1,22 +1,16 @@
 // @ts-ignore
-import spaceshipEnabled from '../assets/spaceship_enabled.png';
-// @ts-ignore
-import spaceshipDisabled from '../assets/spaceship_disabled.png';
+import playership_image from '../assets/playership.png';
 
 import Spaceship from './Spaceship';
 
 export default class PlayerShip extends Spaceship {
     init(): void {
-        this.enabledImage = this.p.loadImage(spaceshipEnabled);
-        this.disabledImage = this.p.loadImage(spaceshipDisabled);
+        this.image = this.p.loadImage(playership_image);
 
         this.directionX = 0;
         this.directionY = 0;
 
-        this.pointDirection = 0;
-
-        this.shotFrequency = 10;
-        this.gunPositions = [0];
+        this.pointDirection = 45;
         this.turnAmount = 2;
 
         this.size = 50;
@@ -25,11 +19,14 @@ export default class PlayerShip extends Spaceship {
 
         this.secondaryColor = [0, 0, 255];
 
-        this.x = this.game.width / 2 + this.size;
-        this.y = this.game.height / 2;
+        this.x = this.game.width / 4;
+        this.y = this.game.height / 4;
 
         this.health = 10;
-        this.maxHealth = 10;
+        this.maxHealth = this.health;
+
+        this.shotFrequency = 10;
+        // this.gunPositions = [10, -10];
     }
 
     update(): void {

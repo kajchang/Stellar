@@ -79,6 +79,7 @@ export default class SpriteManager extends Manager {
                     this.p.push();
 
                     if (sprite.finished()) {
+                        sprite.active = false;
                         layer[type].splice(i, 1);
                     }
                     sprite.draw();

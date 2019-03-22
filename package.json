@@ -5,6 +5,7 @@
     "dev": "webpack-dev-server --open"
   },
   "dependencies": {
+    "copy-webpack-plugin": "^5.0.1",
     "p5": "^0.7.3"
   },
   "devDependencies": {

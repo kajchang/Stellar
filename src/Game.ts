@@ -4,10 +4,6 @@ import Manager from './managers/Manager';
 import SpriteManager from './managers/SpriteManager';
 import Camera from './managers/Camera';
 
-interface Map<V> {
-    [K: string]: V;
-}
-
 export default class Game {
     private readonly p: p5;
 
@@ -16,8 +12,10 @@ export default class Game {
 
     private readonly background: any;
 
-    private readonly spriteManager: SpriteManager;
-    private readonly camera: Camera;
+    readonly spriteManager: SpriteManager;
+    readonly camera: Camera;
+
+    started: boolean;
 
     constructor(p: p5, width: number, height: number, background: any, spriteManager: SpriteManager, camera: Camera) {
         this.p = p;
@@ -32,6 +30,8 @@ export default class Game {
 
         this.spriteManager.game = this;
         this.camera.game = this;
+
+        this.started = false;
     }
 
     executeManagers(): void {

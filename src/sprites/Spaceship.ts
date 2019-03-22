@@ -6,12 +6,10 @@ import Floater from './Floater';
 import Bullet from './Bullet';
 
 export default abstract class Spaceship extends Floater {
-    protected enabledImage: p5.Image;
-    protected disabledImage: p5.Image;
+    protected image: p5.Image;
 
     protected maxSpeed: number;
     protected shotFrequency: number;
-    protected gunPositions: number[];
 
     protected acceleration: number;
     protected turnAmount: number;
@@ -19,13 +17,20 @@ export default abstract class Spaceship extends Floater {
     protected size: number;
     secondaryColor: any;
 
-    protected enabled = false;
     private lastShot: number;
 
     protected health: number;
     protected maxHealth: number;
 
+    // protected gunPositions: number[];
+
     type = 'SPACESHIP';
+
+    constructor() {
+        super();
+
+        this.lastShot = 0;
+    }
 
     finished(): boolean {
         return this.health < 0;
@@ -51,6 +56,7 @@ export default abstract class Spaceship extends Floater {
     draw(): void {
         this.p.translate(this.x, this.y);
 
+        this.p.noStroke();
         this.p.rectMode(this.p.CENTER);
 
         this.p.fill(100);
@@ -58,17 +64,29 @@ export default abstract class Spaceship extends Floater {
 
         this.p.rectMode(this.p.CORNER);
 
-        this.p.fill(this.secondaryColor);
-        this.p.rect(-55 / 2 + 7 / 2, -this.size / 2 - 10 - 7 / 2, 48 * this.health / this.maxHealth, 8);
+        if (this.health > 0) {
+            this.p.fill(this.secondaryColor);
+            this.p.rect(-55 / 2 + 7 / 2, -this.size / 2 - 10 - 7 / 2, 48 * this.health / this.maxHealth, 8);
+        }
 
         const dRadians = this.pointDirection * (Math.PI / 180);
         this.p.rotate(dRadians);
 
-        const image = this.enabled ? this.enabledImage : this.disabledImage;
-        this.enabled = false;
-
         this.p.imageMode(this.p.CENTER);
-        this.p.image(image, 0, 0, this.size, this.size);
+        this.p.image(this.image, 0, 0, this.size, this.size);
+
+        // for (let gun of this.gunPositions) {
+        //     this.p.stroke('red');
+        //     this.p.fill('red');
+
+        //     const xOffset = gun * Math.cos(dRadians);
+        //     const yOffset = gun * Math.sin(dRadians);
+
+        //     this.p.line(0, 0, 0, yOffset);
+        //     this.p.line(0, yOffset, xOffset, yOffset);
+        //     this.p.line(0, 0, xOffset, yOffset);
+        //     this.p.ellipse(xOffset, yOffset, 2.5);
+        // }
     }
 
     accelerate(dAmount: number): void {
@@ -91,48 +109,53 @@ export default abstract class Spaceship extends Floater {
         super.move();
 
         if (this.x >= this.game.width - this.size / 2 - 20) {
+            this.health -= this.maxHealth / 300;
             this.x = this.game.width - this.size / 2 - 20;
             this.directionY /= 2;
         } else if (this.x <= this.size / 2 + 20) {
+            this.health -= this.maxHealth / 300;
             this.x = this.size / 2 + 20;
             this.directionY /= 2;
         }
 
         if (this.y >= this.game.height - this.size / 2 - 20) {
+            this.health -= this.maxHealth / 300;
             this.y = this.game.height - this.size / 2 - 20;
             this.directionX /= 2;
         } else if (this.y <= this.size / 2 + 20) {
+            this.health -= this.maxHealth / 300;
             this.y = this.size / 2 + 20;
             this.directionX /= 2;
         }
     }
 
-    enable(): void {
-        this.enabled = true;
-    }
-
     turnLeft(): void {
         this.turn(-this.turnAmount);
-        this.enable();
     }
 
     turnRight(): void {
         this.turn(this.turnAmount);
-        this.enable();
     }
 
     accelerateForward(): void {
         this.accelerate(this.acceleration);
-        this.enable();
     }
 
     accelerateBackward(): void {
         this.accelerate(-this.acceleration);
-        this.enable();
     }
 
     shoot(): void {
-        if (this.lastShot == null || this.lastShot == 0) {
+        if (this.lastShot == 0) {
+            // const dRadians = this.pointDirection * (Math.PI / 180);
+
+            // for (let gun of this.gunPositions) {
+            //     const xOffset = gun * Math.sin(dRadians);
+            //     const yOffset = gun * Math.cos(dRadians);
+
+            //     this.manager.addSprite(new Bullet(this.x + xOffset, this.y + yOffset, this.directionX, this.directionY, this.pointDirection, this.secondaryColor), Layers.FOREGROUND);
+            // }
+
             this.manager.addSprite(new Bullet(this.x, this.y, this.directionX, this.directionY, this.pointDirection, this.secondaryColor), Layers.FOREGROUND);
 
             this.lastShot = this.shotFrequency;
