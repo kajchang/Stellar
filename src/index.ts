@@ -28,7 +28,7 @@ const sketch = (p: p5) => {
     p.setup = function() {
         p.createCanvas(p.windowWidth, p.windowHeight);
 
-        for (let i = 0; i < 100; i++) {
+        for (let i = 0; i < 500; i++) {
             gameSpriteManager.addSprite(new Star, Layers.BACKGROUND);
         }
 
