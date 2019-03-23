@@ -8,7 +8,7 @@ import Layers from './Layers';
 
 import PlayerShip from './sprites/PlayerShip';
 import Star from './sprites/Star';
-import Flagship from './sprites/Flagship';
+import EnemyFlagship from './sprites/EnemyFlagship';
 import MiniMap from './sprites/MiniMap';
 
 const sketch = (p: p5) => {
@@ -33,7 +33,7 @@ const sketch = (p: p5) => {
         }
 
         gameSpriteManager.addSprite(ship, 1);
-        gameSpriteManager.addSprite(new Flagship(), Layers.FOREGROUND);
+        gameSpriteManager.addSprite(new EnemyFlagship(), Layers.FOREGROUND);
         gameSpriteManager.addSprite(new MiniMap(), Layers.UI);
     };
 

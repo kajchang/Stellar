@@ -4,7 +4,7 @@ import flagship_image from '../assets/flagship.png';
 import BirthingShip from './BirthingShip';
 import EnemyShip from './EnemyShip';
 
-export default class Flagship extends BirthingShip {
+export default class EnemyFlagship extends BirthingShip {
     init(): void {
         this.image = this.p.loadImage(flagship_image);
 
@@ -26,7 +26,8 @@ export default class Flagship extends BirthingShip {
         this.health = 100;
         this.maxHealth = this.health;
 
-        this.birthingRate = 600;
+        this.birthingRate = 60;
+        this.maxChildren = 5;
         this.childType = EnemyShip;
 
         // this.gunPositions = [10, -10];

@@ -10,16 +10,22 @@ interface Constructor {
 export default abstract class BirthingShip extends Spaceship {
     private birthingCounter = 0;
     protected birthingRate: number;
+    protected maxChildren: number;
     protected childType: Constructor;
 
     update(): void {
         super.update();
 
-        if (this.birthingCounter == 0) {
+        if (this.birthingCounter == 0 &&
+            this.manager.getTypeOfSprites<ChildShip>('SPACESHIP', Layers.FOREGROUND).filter(ship => ship.parent == this).length < this.maxChildren) {
             this.birthingCounter = this.birthingRate;
-            this.manager.addSprite(new this.childType(this.x, this.y), Layers.FOREGROUND);
+            const child = new this.childType(this.x, this.y);
+            child.parent = this;
+            this.manager.addSprite(child, Layers.FOREGROUND);
         }
 
-        this.birthingCounter--;
+        if (this.birthingCounter > 0) {
+            this.birthingCounter--;
+        }
     }
 }
