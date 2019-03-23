@@ -19,6 +19,7 @@ export default abstract class Floater extends Sprite {
     }
 
     move(): void {
+        console.log(this.position);
         this.position.add(this.velocity);
     }
 }

@@ -11,7 +11,7 @@ import { truncate } from '../../Math';
 export default abstract class Spaceship extends Floater {
     protected image: p5.Image;
 
-    protected maxSpeed: number;
+    maxSpeed: number;
     protected shotFrequency: number;
 
     protected acceleration: number;
@@ -94,7 +94,7 @@ export default abstract class Spaceship extends Floater {
         super.accelerate(dAmount);
 
         this.velocity.x = truncate(this.velocity.x, this.maxSpeed);
-        this.velocity.y = truncate(this.velocity.y, this.maxSpeed)
+        this.velocity.y = truncate(this.velocity.y, this.maxSpeed);
     }
 
     move(): void {

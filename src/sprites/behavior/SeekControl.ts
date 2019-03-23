@@ -5,17 +5,17 @@ import { truncate } from '../../Math';
 
 export default (it: Spaceship, target: Sprite) => {
     if (target) {
-        const a = Math.abs(it.position.y - target.position.y);
-        const b = Math.abs(it.position.x - target.position.x);
+        const targetVelocity = target.position.copy().sub(it.position).normalize().mult(it.maxSpeed);
+        const steering = targetVelocity.sub(it.velocity);
 
-        let targetAngle = Math.atan2(a, b) * 180 / Math.PI;
-        if (target.position.x + 100 <= it.position.x) {
-            targetAngle += 180;
-        }
+        steering.x = truncate(it.velocity.x + steering.x, it.maxSpeed);
+        steering.y = truncate(it.velocity.x + steering.y, it.maxSpeed);
 
-        it.turn(truncate(targetAngle - it.pointDirection, it.turnAmount));
+        it.velocity = steering;
 
-        it.accelerateForward();
+        it.pointDirection = Math.atan2(it.velocity.y, it.velocity.x) * 180 / Math.PI;
+
+        // it.accelerateForward();
         it.shoot();
     }
 }
