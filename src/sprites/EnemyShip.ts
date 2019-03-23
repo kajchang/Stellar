@@ -35,10 +35,13 @@ export default class EnemyShip extends ChildShip {
             const a = Math.abs(this.y - target.y);
             const b = Math.abs(this.x - target.x);
 
-            const targetAngle = Math.atan2(a, b) * 180 / Math.PI + 180;
-            this.pointDirection = targetAngle;
-            //const P = 0.01;
-            //this.turn((this.pointDirection - targetAngle) * P);
+            let targetAngle = Math.atan2(a, b) * 180 / Math.PI;
+            if (target.x < this.x) {
+                targetAngle += 180;
+            }
+            // this.pointDirection = targetAngle;
+            const P = 0.1;
+            this.turn(-(this.pointDirection - targetAngle) * P);
 
             this.accelerateForward();
             this.shoot();
