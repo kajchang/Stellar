@@ -5,6 +5,8 @@ import Layers from '../Layers';
 import Floater from './Floater';
 import Bullet from './Bullet';
 
+import * as _ from 'lodash-es';
+
 export default abstract class Spaceship extends Floater {
     protected image: p5.Image;
 
@@ -46,7 +48,7 @@ export default abstract class Spaceship extends Floater {
         const collisions = this.manager.checkCollision<Bullet>(this, 'BULLET', Layers.FOREGROUND);
 
         for (let collision of collisions) {
-            if (collision.color != this.secondaryColor) {
+            if (!_.isEqual(collision.color, this.secondaryColor)) {
                 this.manager.removeSprite(collision, Layers.FOREGROUND);
                 this.health--;
             }

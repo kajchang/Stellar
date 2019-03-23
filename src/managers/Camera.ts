@@ -6,7 +6,7 @@ import Sprite from '../sprites/Sprite';
 export default class Camera extends Manager {
     cameraFocus: Sprite;
 
-    type = "CAMERA";
+    type = 'CAMERA';
 
     constructor(p: p5, cameraFocus: Sprite) {
         super(p);

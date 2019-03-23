@@ -11,7 +11,7 @@ interface Map<V> {
 export default class SpriteManager extends Manager {
     private readonly sprites: Map<Sprite[]>[];
 
-    type = "SPRITEMANAGER";
+    type = 'SPRITEMANAGER';
 
     constructor(p: p5) {
         super(p);
