@@ -6,7 +6,6 @@ import Floater from './Floater';
 import Bullet from '../Bullet';
 
 import * as _ from 'lodash-es';
-import { truncate } from '../../Math';
 
 export default abstract class Spaceship extends Floater {
     protected image: p5.Image;
@@ -93,8 +92,7 @@ export default abstract class Spaceship extends Floater {
     accelerate(dAmount: number): void {
         super.accelerate(dAmount);
 
-        this.velocity.x = truncate(this.velocity.x, this.maxSpeed);
-        this.velocity.y = truncate(this.velocity.y, this.maxSpeed);
+        this.velocity.truncate(this.maxSpeed);
     }
 
     move(): void {

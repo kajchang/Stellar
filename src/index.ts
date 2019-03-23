@@ -11,6 +11,8 @@ import Star from './sprites/Star';
 import EnemyFlagship from './sprites/EnemyFlagship';
 import MiniMap from './sprites/MiniMap';
 
+import './Math';
+
 const sketch = (p: p5) => {
     let ship: PlayerShip, gameSpriteManager: SpriteManager, camera: Camera, game: Game, font: p5.Font;
 
