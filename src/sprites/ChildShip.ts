@@ -4,10 +4,7 @@ import BirthingShip from './BirthingShip';
 export default abstract class ChildShip extends Spaceship {
     parent: BirthingShip;
 
-    constructor(x: number, y: number) {
-        super();
-
-        this.x = x;
-        this.y = y;
+    init(x: number, y: number) {
+        this.position = this.p.createVector(x, y);
     }
 }

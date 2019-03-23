@@ -5,11 +5,12 @@ import ChildShip from './ChildShip';
 import Layers from '../Layers';
 
 export default class EnemyShip extends ChildShip {
-    init(): void {
+    init(x: number, y: number): void {
+        super.init(x, y);
+
         this.image = this.p.loadImage(enemyship_image);
 
-        this.directionX = 0;
-        this.directionY = 0;
+        this.velocity = this.p.createVector(0, 0);
 
         this.pointDirection = 225;
         this.turnAmount = 0.5;
@@ -32,14 +33,13 @@ export default class EnemyShip extends ChildShip {
         const target = this.manager.getTypeOfSprites('SPACESHIP', Layers.FOREGROUND).find(ship => ship.focus);
 
         if (target) {
-            const a = Math.abs(this.y - target.y);
-            const b = Math.abs(this.x - target.x);
+            const a = Math.abs(this.position.y - target.position.y);
+            const b = Math.abs(this.position.x - target.position.x);
 
             let targetAngle = Math.atan2(a, b) * 180 / Math.PI;
-            if (target.x < this.x) {
+            if (target.position.x <= this.position.x) {
                 targetAngle += 180;
             }
-            // this.pointDirection = targetAngle;
             const P = 0.1;
             this.turn(-(this.pointDirection - targetAngle) * P);
 

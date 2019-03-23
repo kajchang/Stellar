@@ -8,15 +8,14 @@ export default abstract class Sprite {
     manager: SpriteManager;
     game: Game;
 
-    x: number;
-    y: number;
+    position: p5.Vector;
 
     focus = false;
     active = true;
 
     type = 'SPRITE';
 
-    abstract init(): void
+    abstract init(...args: any[]): void
     abstract finished(): boolean
     abstract update(): void
     abstract draw(): void

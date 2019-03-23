@@ -19,19 +19,17 @@ export default abstract class Spaceship extends Floater {
     protected size: number;
     secondaryColor: any;
 
-    private lastShot: number;
+    private lastShot = 0;
 
     protected health: number;
     protected maxHealth: number;
 
     // protected gunPositions: number[];
 
-    type = 'SPACESHIP';
-
     constructor() {
         super();
 
-        this.lastShot = 0;
+        this.type = 'SPACESHIP';
     }
 
     finished(): boolean {
@@ -56,7 +54,7 @@ export default abstract class Spaceship extends Floater {
     }
 
     draw(): void {
-        this.p.translate(this.x, this.y);
+        this.p.translate(this.position.x, this.position.y);
 
         this.p.noStroke();
         this.p.rectMode(this.p.CENTER);
@@ -94,40 +92,40 @@ export default abstract class Spaceship extends Floater {
     accelerate(dAmount: number): void {
         super.accelerate(dAmount);
 
-        if (this.directionX > this.maxSpeed) {
-            this.directionX = this.maxSpeed;
-        } else if (this.directionX < -this.maxSpeed) {
-            this.directionX = -this.maxSpeed;
+        if (this.velocity.x > this.maxSpeed) {
+            this.velocity.x = this.maxSpeed;
+        } else if (this.velocity.x < -this.maxSpeed) {
+            this.velocity.x = -this.maxSpeed;
         }
 
-        if (this.directionY > this.maxSpeed) {
-            this.directionY = this.maxSpeed;
-        } else if (this.directionY < -this.maxSpeed) {
-            this.directionY = -this.maxSpeed;
+        if (this.velocity.y > this.maxSpeed) {
+            this.velocity.y = this.maxSpeed;
+        } else if (this.velocity.y < -this.maxSpeed) {
+            this.velocity.y = -this.maxSpeed;
         }
     }
 
     move(): void {
         super.move();
 
-        if (this.x >= this.game.width - this.size / 2 - 20) {
+        if (this.position.x >= this.game.width - this.size / 2 - 20) {
             this.health -= this.maxHealth / 300;
-            this.x = this.game.width - this.size / 2 - 20;
-            this.directionY /= 2;
-        } else if (this.x <= this.size / 2 + 20) {
+            this.position.x = this.game.width - this.size / 2 - 20;
+            this.velocity.y /= 2;
+        } else if (this.position.x <= this.size / 2 + 20) {
             this.health -= this.maxHealth / 300;
-            this.x = this.size / 2 + 20;
-            this.directionY /= 2;
+            this.position.x = this.size / 2 + 20;
+            this.velocity.y /= 2;
         }
 
-        if (this.y >= this.game.height - this.size / 2 - 20) {
+        if (this.position.y >= this.game.height - this.size / 2 - 20) {
             this.health -= this.maxHealth / 300;
-            this.y = this.game.height - this.size / 2 - 20;
-            this.directionX /= 2;
-        } else if (this.y <= this.size / 2 + 20) {
+            this.position.y = this.game.height - this.size / 2 - 20;
+            this.velocity.x /= 2;
+        } else if (this.position.y <= this.size / 2 + 20) {
             this.health -= this.maxHealth / 300;
-            this.y = this.size / 2 + 20;
-            this.directionX /= 2;
+            this.position.y = this.size / 2 + 20;
+            this.velocity.x /= 2;
         }
     }
 
@@ -158,13 +156,13 @@ export default abstract class Spaceship extends Floater {
             //     this.manager.addSprite(new Bullet(this.x + xOffset, this.y + yOffset, this.directionX, this.directionY, this.pointDirection, this.secondaryColor), Layers.FOREGROUND);
             // }
 
-            this.manager.addSprite(new Bullet(this.x, this.y, this.directionX, this.directionY, this.pointDirection, this.secondaryColor), Layers.FOREGROUND);
+            this.manager.addSprite(new Bullet(), Layers.FOREGROUND, this.position.x, this.position.y, this.velocity.x, this.velocity.y, this.pointDirection, this.secondaryColor);
 
             this.lastShot = this.shotFrequency;
         }
     }
 
     collisionVector(): [number, number, number, number] {
-        return [this.x, this.y, this.size, this.size];
+        return [this.position.x, this.position.y, this.size, this.size];
     }
 }

@@ -1,17 +1,17 @@
+import * as p5 from 'p5';
+
 import Sprite from './Sprite';
 
 // Floater Logic ported from https://github.com/APCSLowell/AsteroidsGame/blob/master/Floater.pde
 
 export default abstract class Floater extends Sprite {
-    directionX: number;
-    directionY: number;
+    velocity: p5.Vector;
     pointDirection: number;
 
     accelerate(dAmount: number): void {
         const dRadians = this.pointDirection * (Math.PI / 180);
 
-        this.directionX += dAmount * Math.cos(dRadians);
-        this.directionY += dAmount * Math.sin(dRadians);
+        this.velocity.add(dAmount * Math.cos(dRadians), dAmount * Math.sin(dRadians));
     }
 
     turn(nDegreesOfRotation: number): void {
@@ -19,7 +19,6 @@ export default abstract class Floater extends Sprite {
     }
 
     move(): void {
-        this.x += this.directionX;
-        this.y += this.directionY;
+        this.position.add(this.velocity);
     }
 }

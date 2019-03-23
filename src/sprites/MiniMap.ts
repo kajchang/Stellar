@@ -23,8 +23,8 @@ export default class MiniMap extends Sprite {
 
         for (let ship of this.manager.getTypeOfSprites<Spaceship>('SPACESHIP', 1)) {
             this.p.fill(ship.secondaryColor);
-            this.p.ellipse(ship.x * (100 * this.p.width / this.p.height / this.game.width) - MiniMap.SHIP_WIDTH / 2,
-                           ship.y * (100 / this.game.height) + MiniMap.SHIP_WIDTH / 2, MiniMap.SHIP_WIDTH);
+            this.p.ellipse(ship.position.x * (100 * this.p.width / this.p.height / this.game.width) - MiniMap.SHIP_WIDTH / 2,
+                           ship.position.y * (100 / this.game.height) + MiniMap.SHIP_WIDTH / 2, MiniMap.SHIP_WIDTH);
         }
     }
 

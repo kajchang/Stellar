@@ -8,11 +8,8 @@ export default class EnemyFlagship extends BirthingShip {
     init(): void {
         this.image = this.p.loadImage(flagship_image);
 
-        this.x = this.game.width * 3 / 4;
-        this.y = this.game.height * 3 / 4;
-
-        this.directionX = 0;
-        this.directionY = 0;
+        this.position = this.p.createVector(this.game.width * 3 / 4, this.game.height * 3 / 4);
+        this.velocity = this.p.createVector(0, 0);
 
         this.pointDirection = 180;
         this.turnAmount = 0.5;
@@ -26,7 +23,7 @@ export default class EnemyFlagship extends BirthingShip {
         this.health = 100;
         this.maxHealth = this.health;
 
-        this.birthingRate = 60;
+        this.birthingRate = 300;
         this.maxChildren = 5;
         this.childType = EnemyShip;
 

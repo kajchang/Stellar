@@ -11,15 +11,15 @@ interface Map<V> {
 export default class SpriteManager extends Manager {
     private readonly sprites: Map<Sprite[]>[];
 
-    type = 'SPRITEMANAGER';
-
     constructor(p: p5) {
         super(p);
+
+        this.type = 'SPRITEMANAGER';
 
         this.sprites = [];
     }
 
-    addSprite(sprite: Sprite, layer: number): void {
+    addSprite(sprite: Sprite, layer: number, ...args: any[]): void {
         if (this.sprites[layer] == undefined) {
             this.sprites[layer] = {};
         }
@@ -32,7 +32,7 @@ export default class SpriteManager extends Manager {
         sprite.manager = this;
         sprite.game = this.game;
         sprite.p = this.p;
-        sprite.init();
+        sprite.init(...args);
     }
 
     removeSprite(sprite: Sprite, layer: number): void {

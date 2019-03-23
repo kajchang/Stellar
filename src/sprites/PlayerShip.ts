@@ -7,8 +7,8 @@ export default class PlayerShip extends Spaceship {
     init(): void {
         this.image = this.p.loadImage(playership_image);
 
-        this.directionX = 0;
-        this.directionY = 0;
+        this.position = this.p.createVector(this.game.width / 4, this.game.height / 4);
+        this.velocity = this.p.createVector(0, 0);
 
         this.pointDirection = 45;
         this.turnAmount = 2;
@@ -18,9 +18,6 @@ export default class PlayerShip extends Spaceship {
         this.acceleration = this.maxSpeed / 5;
 
         this.secondaryColor = [0, 0, 255];
-
-        this.x = this.game.width / 4;
-        this.y = this.game.height / 4;
 
         this.health = 25;
         this.maxHealth = this.health;
