@@ -1,11 +1,12 @@
 import * as p5 from 'p5';
 
-import Layers from '../Layers';
+import Layers from '../../Layers';
 
 import Floater from './Floater';
-import Bullet from './Bullet';
+import Bullet from '../Bullet';
 
 import * as _ from 'lodash-es';
+import { truncate } from '../../Math';
 
 export default abstract class Spaceship extends Floater {
     protected image: p5.Image;
@@ -14,7 +15,7 @@ export default abstract class Spaceship extends Floater {
     protected shotFrequency: number;
 
     protected acceleration: number;
-    protected turnAmount: number;
+    turnAmount: number;
 
     protected size: number;
     secondaryColor: any;
@@ -92,17 +93,8 @@ export default abstract class Spaceship extends Floater {
     accelerate(dAmount: number): void {
         super.accelerate(dAmount);
 
-        if (this.velocity.x > this.maxSpeed) {
-            this.velocity.x = this.maxSpeed;
-        } else if (this.velocity.x < -this.maxSpeed) {
-            this.velocity.x = -this.maxSpeed;
-        }
-
-        if (this.velocity.y > this.maxSpeed) {
-            this.velocity.y = this.maxSpeed;
-        } else if (this.velocity.y < -this.maxSpeed) {
-            this.velocity.y = -this.maxSpeed;
-        }
+        this.velocity.x = truncate(this.velocity.x, this.maxSpeed);
+        this.velocity.y = truncate(this.velocity.y, this.maxSpeed)
     }
 
     move(): void {

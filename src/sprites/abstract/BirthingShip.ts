@@ -1,7 +1,7 @@
 import Spaceship from './Spaceship';
 import ChildShip from './ChildShip';
 
-import Layers from '../Layers';
+import Layers from '../../Layers';
 
 interface Constructor {
     new(): ChildShip;

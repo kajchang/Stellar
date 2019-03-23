@@ -1,6 +1,6 @@
 import * as p5 from 'p5';
 
-import Sprite from './Sprite';
+import Sprite from './abstract/Sprite';
 
 export default class Bullet extends Sprite {
     static BULLET_WIDTH = 2;

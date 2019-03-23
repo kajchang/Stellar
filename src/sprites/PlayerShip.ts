@@ -1,7 +1,9 @@
 // @ts-ignore
 import playership_image from '../assets/playership.png';
 
-import Spaceship from './Spaceship';
+import Spaceship from './abstract/Spaceship';
+
+import UserControl, { ARROWS, KEYBOARD } from './behavior/UserControl';
 
 export default class PlayerShip extends Spaceship {
     init(): void {
@@ -11,7 +13,7 @@ export default class PlayerShip extends Spaceship {
         this.velocity = this.p.createVector(0, 0);
 
         this.pointDirection = 45;
-        this.turnAmount = 2;
+        this.turnAmount = 2.5;
 
         this.size = 50;
         this.maxSpeed = 7.5;
@@ -29,24 +31,6 @@ export default class PlayerShip extends Spaceship {
     update(): void {
         super.update();
 
-        if (this.p.keyIsDown(38)) {
-            this.accelerateForward();
-        }
-
-        if (this.p.keyIsDown(40)) {
-            this.accelerateBackward();
-        }
-
-        if (this.p.keyIsDown(37)) {
-            this.turnLeft();
-        }
-
-        if (this.p.keyIsDown(39)) {
-            this.turnRight();
-        }
-
-        if (this.p.keyIsDown(32)) {
-            this.shoot();
-        }
+        UserControl(this, ARROWS);
     }
 }

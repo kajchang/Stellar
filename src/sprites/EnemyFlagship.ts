@@ -1,7 +1,7 @@
 // @ts-ignore
 import flagship_image from '../assets/flagship.png';
 
-import BirthingShip from './BirthingShip';
+import BirthingShip from './abstract/BirthingShip';
 import EnemyShip from './EnemyShip';
 
 export default class EnemyFlagship extends BirthingShip {
@@ -12,7 +12,7 @@ export default class EnemyFlagship extends BirthingShip {
         this.velocity = this.p.createVector(0, 0);
 
         this.pointDirection = 180;
-        this.turnAmount = 0.5;
+        this.turnAmount = 2.5;
 
         this.size = 100;
         this.maxSpeed = this.size / 100;

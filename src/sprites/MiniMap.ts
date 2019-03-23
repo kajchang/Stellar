@@ -1,6 +1,6 @@
-import Sprite from './Sprite';
+import Sprite from './abstract/Sprite';
 import Camera from '../managers/Camera';
-import Spaceship from './Spaceship';
+import Spaceship from './abstract/Spaceship';
 
 export default class MiniMap extends Sprite {
     static SHIP_WIDTH = 10;

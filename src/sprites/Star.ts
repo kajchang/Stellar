@@ -1,4 +1,4 @@
-import Sprite from './Sprite';
+import Sprite from './abstract/Sprite';
 
 export default class Star extends Sprite {
     static STAR_SIZE = 5;

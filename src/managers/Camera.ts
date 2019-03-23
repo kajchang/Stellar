@@ -1,7 +1,7 @@
 import * as p5 from 'p5';
 
 import Manager from './Manager';
-import Sprite from '../sprites/Sprite';
+import Sprite from '../sprites/abstract/Sprite';
 
 export default class Camera extends Manager {
     cameraFocus: Sprite;

@@ -1,6 +1,6 @@
 import * as p5 from 'p5';
 
-import Sprite from '../sprites/Sprite';
+import Sprite from '../sprites/abstract/Sprite';
 import Manager from './Manager';
 
 interface Map<V> {
