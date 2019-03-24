@@ -16,8 +16,8 @@ export default class PlayerShip extends Spaceship {
         this.turnAmount = 2.5;
 
         this.size = 50;
-        this.maxSpeed = 7.5;
-        this.acceleration = this.maxSpeed / 5;
+        this.maxVelocity = 7.5;
+        this.acceleration = this.maxVelocity / 5;
 
         this.secondaryColor = [0, 0, 255];
 

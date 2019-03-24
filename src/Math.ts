@@ -1,6 +1,5 @@
 import { Vector } from 'p5';
 
-
 const truncate = (value: number, max: number): number => {
     if (value > max) {
         return max;

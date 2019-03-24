@@ -4,13 +4,13 @@ import Game from './Game';
 
 import SpriteManager from './managers/SpriteManager';
 import Camera from './managers/Camera';
-import Layers from './Layers';
 
 import PlayerShip from './sprites/PlayerShip';
 import Star from './sprites/Star';
 import EnemyFlagship from './sprites/EnemyFlagship';
 import MiniMap from './sprites/MiniMap';
 
+import Layers from './Layers';
 import './Math';
 
 const sketch = (p: p5) => {

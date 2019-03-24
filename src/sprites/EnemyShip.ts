@@ -1,10 +1,10 @@
 // @ts-ignore
 import enemyship_image from '../assets/enemyship.png';
 
+import SeekControl from './behavior/SeekControl';
+import ArrivalControl from './behavior/ArrivalControl';
 import ChildShip from './abstract/ChildShip';
 import Layers from '../Layers';
-
-import SeekControl from './behavior/SeekControl';
 
 export default class EnemyShip extends ChildShip {
     init(x: number, y: number): void {
@@ -18,8 +18,8 @@ export default class EnemyShip extends ChildShip {
         this.turnAmount = 2.5;
 
         this.size = 50;
-        this.maxSpeed = 5;
-        this.acceleration = this.maxSpeed / 5;
+        this.maxVelocity = 5;
+        this.acceleration = this.maxVelocity / 5;
 
         this.secondaryColor = [255, 0, 0];
 
@@ -32,7 +32,7 @@ export default class EnemyShip extends ChildShip {
     update(): void {
         super.update();
 
-        SeekControl(this,
+        ArrivalControl(this,
                     this.manager.getTypeOfSprites('SPACESHIP', Layers.FOREGROUND).find(ship => ship.focus));
     }
 }

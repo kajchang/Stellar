@@ -15,8 +15,8 @@ export default class EnemyFlagship extends BirthingShip {
         this.turnAmount = 2.5;
 
         this.size = 100;
-        this.maxSpeed = this.size / 100;
-        this.acceleration = this.maxSpeed / 5;
+        this.maxVelocity = this.size / 100;
+        this.acceleration = this.maxVelocity / 5;
 
         this.secondaryColor = [255, 0, 0];
 
