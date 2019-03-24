@@ -54,6 +54,8 @@ const sketch = (p: p5) => {
             p.textFont('Azonix');
             p.textSize(p.width / 25);
             p.text('Press RETURN to Start.', p.width / 2, p.height / 2);
+            p.textSize(p.width / 50);
+            p.text('Use arrows to move and space to shoot.', p.width / 2, p.height / 2 + p.textAscent() * 2);
             if (p.keyIsDown(13)) {
                 game.started = true;
             }
