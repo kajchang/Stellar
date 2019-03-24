@@ -1,6 +1,3 @@
-// @ts-ignore
-import enemyship_image from '../assets/enemyship.png';
-
 import SeekControl from './behavior/SeekControl';
 import ArrivalControl from './behavior/ArrivalControl';
 import ChildShip from './abstract/ChildShip';
@@ -10,7 +7,7 @@ export default class EnemyShip extends ChildShip {
     init(x: number, y: number): void {
         super.init(x, y);
 
-        this.image = this.p.loadImage(enemyship_image);
+        this.image = this.game.images.ENEMYSHIP;
 
         this.velocity = this.p.createVector(0, 0);
 

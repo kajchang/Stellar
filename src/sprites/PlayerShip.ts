@@ -1,13 +1,10 @@
-// @ts-ignore
-import playership_image from '../assets/playership.png';
-
 import Spaceship from './abstract/Spaceship';
 
 import UserControl, { ARROWS, KEYBOARD } from './behavior/UserControl';
 
 export default class PlayerShip extends Spaceship {
     init(): void {
-        this.image = this.p.loadImage(playership_image);
+        this.image = this.game.images.PLAYERSHIP;
 
         this.position = this.p.createVector(this.game.width / 4, this.game.height / 4);
         this.velocity = this.p.createVector(0, 0);
