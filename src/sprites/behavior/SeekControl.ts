@@ -5,7 +5,7 @@ export default (it: Spaceship, target: Sprite) => {
     if (target) {
         // https://gamedevelopment.tutsplus.com/tutorials/understanding-steering-behaviors-seek--gamedev-849
 
-        const maxForce = 0.25;
+        const maxForce = 0.1;
 
         const targetVelocity = target.position.copy().sub(it.position).normalize().mult(it.maxVelocity);
         const steering = targetVelocity.sub(it.velocity);

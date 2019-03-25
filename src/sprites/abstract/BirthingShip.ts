@@ -15,16 +15,24 @@ export default abstract class BirthingShip extends Spaceship {
     update(): void {
         super.update();
 
-        if (this.birthingCounter == 0 &&
-            this.manager.getTypeOfSprites<ChildShip>('SPACESHIP', Layers.FOREGROUND).filter(ship => ship.parent == this).length < this.maxChildren) {
-            this.birthingCounter = this.birthingRate;
-            const child = new this.childType();
-            child.parent = this;
-            this.manager.addSprite(child, Layers.FOREGROUND, this.position.x, this.position.y);
-        }
-
         if (this.birthingCounter > 0) {
             this.birthingCounter--;
         }
+    }
+
+    birth(): void {
+        if (this.birthingCounter == 0 &&
+            this.manager.getTypeOfSprites<ChildShip>('SPACESHIP', Layers.FOREGROUND).filter(ship => ship.parent == this).length < this.maxChildren) {
+
+            this._birth(this.childType);
+
+            this.birthingCounter = this.birthingRate;
+        }
+    }
+
+    _birth(childType: Constructor): void {
+        const child = new childType();
+        child.parent = this;
+        this.manager.addSprite(child, Layers.FOREGROUND, this.position.x, this.position.y);
     }
 }

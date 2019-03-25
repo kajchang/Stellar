@@ -5,7 +5,7 @@ export default (it: Spaceship, target: Sprite) => {
     if (target) {
         // https://www.red3d.com/cwr/steer/gdc99/
 
-        const maxForce = 0.25;
+        const maxForce = 0.1;
         const slowingDistance = 250;
 
         const offset = target.position.copy().sub(it.position);

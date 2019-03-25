@@ -144,11 +144,14 @@ export default abstract class Spaceship extends Floater {
 
             //     this.manager.addSprite(new Bullet(this.x + xOffset, this.y + yOffset, this.directionX, this.directionY, this.pointDirection, this.secondaryColor), Layers.FOREGROUND);
             // }
-
-            this.manager.addSprite(new Bullet(), Layers.FOREGROUND, this.position.x, this.position.y, this.velocity.x, this.velocity.y, this.pointDirection, this.secondaryColor);
+            this._shoot();
 
             this.lastShot = this.shotFrequency;
         }
+    }
+
+    _shoot(): void {
+        this.manager.addSprite(new Bullet(), Layers.FOREGROUND, this.position.x, this.position.y, this.velocity.x, this.velocity.y, this.pointDirection, this.secondaryColor);
     }
 
     collisionVector(): [number, number, number, number] {

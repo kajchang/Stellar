@@ -30,6 +30,8 @@ export default class EnemyFlagship extends BirthingShip {
     update(): void {
         super.update();
 
+        this.birth();
+
         this.accelerateForward();
         this.turnRight();
     }

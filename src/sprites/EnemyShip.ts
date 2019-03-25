@@ -30,6 +30,6 @@ export default class EnemyShip extends ChildShip {
         super.update();
 
         ArrivalControl(this,
-                    this.manager.getTypeOfSprites('SPACESHIP', Layers.FOREGROUND).find(ship => ship.focus));
+                       this.manager.getTypeOfSprites('SPACESHIP', Layers.FOREGROUND).find(ship => ship.focus));
     }
 }
